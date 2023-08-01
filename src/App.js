@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
 
+import { useState } from 'react';
+import './App.css';
+// import About from './components/About';
+import Navbar from './components/Navbar';
+import Textform from './components/Textform';
+
+
+// let name = "anil";
 function App() {
+  const [btnText,setBtnText] = useState('Enable Dark Mode')
+  const[mode,setmode] = useState('light');
+  const toggleMode = ()=>{
+    if(mode === 'light'){
+      setmode('dark')
+      document.body.style.backgroundColor = '#042743';
+     setBtnText("Enable Light Mode");
+    }
+    else{
+      setmode('light') 
+      document.body.style.backgroundColor = 'white';
+      setBtnText("Enable Dark Mode");
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+  
+<Navbar title = "TextUtils" mode = {mode} about = "About TextUtils" home = "Home" toggleMode={toggleMode} btnText = {btnText}/>
+{/* <Navbar title = "TextUtils" mode = {mode}/> */}
+<div className="container my-3">
+<Textform heading = "Enter Your Text to analyze below " mode = {mode}/>
+{/* <About/> */}
+
+</div>
+
+   </>
   );
 }
+
+
 
 export default App;
