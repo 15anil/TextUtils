@@ -6,6 +6,8 @@ export default function Textform(props) {
  
         let newText = text.toUpperCase();
         setText(newText)
+        props.showAlert("Converted to uppercase" , "success ")
+        
     }
     //to make it mutable
     const handleOnChange = (event)=>{
@@ -15,25 +17,35 @@ export default function Textform(props) {
  
         let newText = text.toLowerCase();
         setText(newText)
+        props.showAlert("Converted to Lowercase", "success ")
+
     }
     const handleClearClick = ()=>{
         let newText = (" ");
         setText(newText)
+        props.showAlert("Text cleared", "success ")
+
     }
     //speaks the text
     const handleSpeechClick=()=>{
         let newText = new SpeechSynthesisUtterance();
         newText.text = text;
         window.speechSynthesis.speak(newText);
+        props.showAlert("speech activated", "success ")
+
     }
     const handleCopy = ()=>{
         var text = document.getElementById("myBox");
         text.select()
         navigator.clipboard.writeText(text.value);
+        props.showAlert("text copied ", "success ")
+
     }
     const handleExtraSpaces = ()=>{
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "));
+        props.showAlert("extra spaces removed", "success ")
+
     }
  
     
@@ -53,7 +65,7 @@ export default function Textform(props) {
                   style={{backgroundColor:props.mode === 'light'?'white':'black',color:props.mode==='dark'?'white':'black'}}
                   
               ></textarea>
-              <button className="btn btn-primary my-3" onClick={handleUpClick}>Convert To Upper Case</button>
+              <button className="btn btn-primary my-3"  onClick={handleUpClick}>Convert To Upper Case</button>
               <button className="btn btn-primary mx-4" onClick={handleLoClick}>Convert To Lower Case</button>
               <button className="btn btn-primary mx-4" onClick={handleClearClick}>Clear Text</button>
               <button className="btn btn-primary mx-4" onClick={handleSpeechClick}>Text to Speech</button>
